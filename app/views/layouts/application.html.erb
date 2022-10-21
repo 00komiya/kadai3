@@ -25,21 +25,21 @@
       <nav>
        <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to root_path, class: 'text-white' do %>
+          <li><%= link_to user_path(current_user.id), class: 'text-white' do %>
           <i class="fas fa-home"></i> Home
           <% end %></li>
           <li><%= link_to "/users", class: 'text-white' do %>
-          <i class="fas fa-users"></i> Users 
+          <i class="fas fa-users"></i> Users
           <% end %></li>
-          
+
           <li><%= link_to books_path, class: 'text-white' do %>
-          <i class="fas fa-book-open"></i> Books 
+          <i class="fas fa-book-open"></i> Books
           <% end %></li>
-          
+
           <li><%= link_to destroy_user_session_path,method: :delete, class: 'text-white' do %>
-          <i class="fas fa-sign-out-alt"></i> Log out 
+          <i class="fas fa-sign-out-alt"></i> Log out
           <% end %></li>
-          
+
         <% else %>
           <li><%= link_to root_path, class: 'text-white' do %>
           <i class="fas fa-home"></i> Home
@@ -59,13 +59,11 @@
     </div>
   </header>
 
+  <! ログイン/ログアウトのフラッシュメッセージ-->
    <div class= "body">
-
-    <% if flash[:notice] %>
-      <div class="flash">
-        <%= flash[:notice] %>
-      </div>
-    <% end %>
+   <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+  <% end %>
   </div>
 <main>
  <%= yield %>

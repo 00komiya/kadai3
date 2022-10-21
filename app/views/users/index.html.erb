@@ -1,0 +1,54 @@
+<div class="container px-5 px-sm-0">
+ <div class="row">
+  <div class="col-md-3" >
+    <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
+     <tr>
+       <table>
+        <th><h5>name </h5></th>
+        <th><%= @user.name %></th>
+        <th colspan="3"></th>
+      </tr>
+      </table>
+   <h5>introduction</h5>
+    <%= link_to"",edit_user_path(@user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench"%>
+
+
+     <h2>New book</h2>
+       <%= form_with model: @book do |f| %>
+         <h5>Title</h5>
+          <%= f.text_field :title %>
+           <h5>Opinion</h5>
+             <%= f.text_area :body %>
+	               <br><%= f.submit 'Create Book' %></br>
+	         <% end %>
+    </div>
+
+    <div class="col-md-8 offset-md-1">
+      <h2>Users</h2>
+        <table class="table table-hover table-inverse">
+         <thead>
+           <th>image</th>
+            <th>name</th>
+             <th colspan="3"></th>
+          <tbody>
+           <tr>
+            <td>
+             <% @users.each do |user| %>
+            </td>
+             <td>
+		     　  　 <%= image_tag @user.get_profile_image(100,100) %>
+		     　    </td>
+		     　     <td>
+	 　　    　   <%= user.name %>
+	 　　    　  </td>
+	 　　    　   <td><%= link_to"Show",user_path(user) %></td>
+           </tr>
+           <% end %>
+	        </tbody>
+	       </table>
+     </div>
+  </div>
+</div>
+
+
