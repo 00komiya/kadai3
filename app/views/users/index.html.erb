@@ -1,18 +1,18 @@
 <div class="container px-5 px-sm-0">
- <div class="row">
+ <div class="row"> 
   <div class="col-md-3" >
     <h2>User info</h2>
       <%= image_tag @user.get_profile_image(100,100) %>
      <tr>
-       <table>
-        <th><h5>name </h5></th>
+       <h5>name</h5>
         <th><%= @user.name %></th>
-        <th colspan="3"></th>
+       <tr>
+        <h5>introduction</h5>
+        <th><%= @user.introduction %></th>
       </tr>
-      </table>
-   <h5>introduction</h5>
-    <%= link_to"",edit_user_path(@user.id), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench"%>
-
+    <%= link_to edit_user_path(@user.id), class: "btn btn-outlin-secondary btn-block" do %>
+      <i class="fas fa-user-cog"></i>
+      <% end %>
 
      <h2>New book</h2>
        <%= form_with model: @book do |f| %>
@@ -32,12 +32,10 @@
             <th>name</th>
              <th colspan="3"></th>
           <tbody>
-           <tr>
-            <td>
              <% @users.each do |user| %>
-            </td>
-             <td>
-		     　  　 <%= image_tag @user.get_profile_image(100,100) %>
+             <tr>
+		     　  　 <td>
+		     　  　 <%= image_tag user.get_profile_image(100,100) %>
 		     　    </td>
 		     　     <td>
 	 　　    　   <%= user.name %>
