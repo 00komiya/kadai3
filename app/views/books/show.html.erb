@@ -8,20 +8,30 @@
 <% end %>
 
 <div class="container px-5 px-sm-0">
- <div class="row"> 
-  <div class="col-md-3" >
+ <div class="row">
+  <div class="col-md-3 p-3" >
     <h2>User info</h2>
-      <%= image_tag @user.get_profile_image(100,100) %>
-     <tr>
-       <h5>name</h5>
-        <th><%= @user.name %></th>
-       <tr>
-        <h5>introduction</h5>
-        <th><%= @user.introduction %></th>
-      </tr>
-    <%= link_to edit_user_path(@user.id), class: "btn btn-outlin-secondary btn-block" do %>
-      <i class="fas fa-user-cog"></i>
-      <% end %>
+     <table class="table">
+       <tbody>
+         <tr><%= image_tag @user.get_profile_image(100,100) %></tr>
+         <tr>
+           <th>name</th>
+           <th><%= @user.name %></th>
+         </tr>
+         <tr>
+           <th>introduction</th>
+           <th><%= @user.introduction %></th>
+         </tr>
+       </tbody>
+     </table>
+  <div class="row">
+       <%= link_to edit_user_path(@user.id), class: "btn btn-outline-secondary btn-default btn-block" do %>
+         <i class="fas fa-user-cog"></i>
+       <% end %>
+  </div>
+
+
+
        <h2>New book</h2>
        <%= form_with model: @book_new do |f| %>
          <h5>Title</h5>
@@ -35,18 +45,22 @@
       <div class="col-md-8 offset-md-1">
        <h2>Book detail</h2>
         <table class="table table-hover table-inverse">
-    <td>
-      <%= link_to user_path(@book.user_id) do %>
-           <%= @book.user.name %>
-       <% end %>
-    </td>
+        <tbody>
+         <tr>
+         <td>
+             <%= link_to user_path(@book.user) do %>
+             <%= image_tag @book.user.get_profile_image(100,100) %>
+		           <% end %><br>
+              <%= link_to @book.user.name,user_path(@book.user) %>
+         </td>
     <td><%= link_to @book.title %></td>
     <td><%= @book.body %></td>
     <% if @book.user_id == current_user.id %>
     <td><%= link_to"edit", edit_book_path(@book.id),class:"btn-sm btn-success" %></td>
-    <td><%= link_to "destroy", book_path(@book.id), class:"btn-sm btn-danger destroy(@book.id)", method: :delete,data: {confirm: "削除しますか？"} %></td>
+    <td><%= link_to "destroy", book_path(@book.id), class:"btn-sm btn-danger destroy(@book.id)", method: :delete,data: {confirm: "本当に消しますか？"} %></td>
     <% end %>
-
+    </tr>
+   </tbody>
     </table>
   </div>
 </div>
